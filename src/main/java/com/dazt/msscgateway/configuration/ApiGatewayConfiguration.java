@@ -5,8 +5,6 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.function.Function;
-
 @Configuration
 public class ApiGatewayConfiguration {
 
@@ -19,6 +17,8 @@ public class ApiGatewayConfiguration {
                                 .addRequestHeader("MyHeader", "MyURI")
                                 .addRequestParameter("Param", "MyParam"))
                         .uri("http://httpbin.org:80"))
+                .route(p -> p.path("/mssc-persons/**")
+                            .uri("lb://mssc-persons"))
                 .build();
 
     }
